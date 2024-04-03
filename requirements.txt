@@ -83,6 +83,7 @@ overrides==7.7.0
 packaging==23.2
 posthog==3.5.0
 protobuf==4.25.3
+psycopg2==2.9.9
 pulsar-client==3.4.0
 pyasn1==0.5.1
 pyasn1-modules==0.3.0
