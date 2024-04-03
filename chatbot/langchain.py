@@ -45,6 +45,17 @@ class LangChain:
         """
         Fetches files from the transcripts directory and stores them in the 'file_paths' attribute.
         """
+        # Get the absolute path of the current file
+        current_file_path = os.path.abspath(__file__)
+
+        # Navigate to the parent directory of the current file
+        project_root = os.path.dirname(os.path.dirname(current_file_path))
+
+        # Join the project root with the transcripts directory
+        transcripts_directory = os.path.join(project_root, "chatbot", "transcripts")
+
+        # Print the absolute path of the transcripts directory
+        logger.info(f"Transcripts directory: {transcripts_directory}")
         transcripts_directory = (
             "/home/linux/Chatbot/Django/brite_chatbot/chatbot/transcripts"
         )
