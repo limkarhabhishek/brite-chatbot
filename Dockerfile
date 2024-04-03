@@ -24,10 +24,10 @@ RUN python manage.py makemigrations
 RUN python manage.py migrate
 
 # Check if superuser exists before creating
-RUN python -c "import os; \
-               from django.contrib.auth.models import User; \
-               User.objects.filter(username='admin').exists() or \
-               os.system('python manage.py createsuperuser --noinput --username admin --email admin@example.com')"
+# RUN python -c "import os; \
+#                from django.contrib.auth.models import User; \
+#                User.objects.filter(username='admin').exists() or \
+#                os.system('python manage.py createsuperuser --noinput --username admin --email admin@example.com')"
 
 # Run the Django development server
 CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
