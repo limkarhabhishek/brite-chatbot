@@ -1,0 +1,15 @@
+databases:
+  - name: mysitedb
+    plan: free
+    databaseName: brite_postgres
+    user: britechatbot
+
+services:
+  - type: web
+    plan: free
+    name: mysite
+    runtime: python
+    buildCommand: "./build.sh"
+    startCommand: "python -m gunicorn brite_chatbot.asgi:application -k uvicorn.workers.UvicornWorker"
+    envVars:
+        - fromGroup: brite-chatbot-config
