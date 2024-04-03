@@ -63,6 +63,8 @@ MIDDLEWARE = [
 
 CORS_ORIGIN_ALLOW_ALL = True
 
+CSRF_TRUSTED_ORIGINS = ["https://brite-chatbot.onrender.com/"]
+
 ROOT_URLCONF = "brite_chatbot.urls"
 
 TEMPLATES = [
