@@ -16,8 +16,6 @@ RUN pip install -r requirements.txt
 # Copy the project code into the container
 COPY . /app/
 
-COPY .env /code/
-
 # Expose port 8000 to the outside world
 EXPOSE 8000
 
