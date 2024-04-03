@@ -19,5 +19,14 @@ COPY . /app/
 # Expose port 8000 to the outside world
 EXPOSE 8000
 
+# Run Django migrations and make migrations
+RUN python manage.py makemigrations
+RUN python manage.py migrate
+
+# Create a superuser
+RUN python manage.py createsuperuser --noinput \
+    --username admin \
+    --email admin@example.com
+
 # Run the Django development server
 CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
