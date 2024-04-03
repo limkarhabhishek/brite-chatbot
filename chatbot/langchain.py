@@ -56,9 +56,7 @@ class LangChain:
 
         # Print the absolute path of the transcripts directory
         logger.info(f"Transcripts directory: {transcripts_directory}")
-        transcripts_directory = (
-            "/home/linux/Chatbot/Django/brite_chatbot/chatbot/transcripts"
-        )
+        
 
         # Get the list of .txt files in the directory
         txt_files = [
