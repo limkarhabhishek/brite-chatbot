@@ -4,6 +4,7 @@ from chatbot.langchain import OpenAIChatbot
 from chatbot.models import OpenAIFeedback
 from chatbot.serializers import OpenAIFeedbackRequestSerializer
 from rest_framework import status
+from rest_framework.pagination import PageNumberPagination
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
@@ -41,17 +42,24 @@ class OpenAIFeedbackView(APIView):
     """
 
     serializer_class = OpenAIFeedbackRequestSerializer
+    pagination_class = PageNumberPagination  # Set the pagination class
 
     def get(self, request, format=None):
         """
-        GET request that retrieves all OpenAI feedback requests.
+        GET request that retrieves paginated OpenAI feedback requests.
 
         Returns:
-            List of OpenAI feedback requests in JSON format.
+            Paginated list of OpenAI feedback requests in JSON format.
         """
-        feedbacks = OpenAIFeedback.objects.all()
-        serializer = OpenAIFeedbackRequestSerializer(feedbacks, many=True)
-        return Response(serializer.data)
+        # Order the queryset with descending order based on the id field (UUID)
+        feedbacks = OpenAIFeedback.objects.order_by("-created_at")
+
+        # Get paginated queryset using pagination class
+        paginator = self.pagination_class()
+        paginated_queryset = paginator.paginate_queryset(feedbacks, request)
+
+        serializer = OpenAIFeedbackRequestSerializer(paginated_queryset, many=True)
+        return paginator.get_paginated_response(serializer.data)
 
     def post(self, request, format=None):
         """

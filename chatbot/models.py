@@ -11,6 +11,7 @@ class OpenAIFeedback(models.Model):
     generated_answer = models.TextField(null=True)
     user_expected_answer = models.TextField(null=True)
     dislike = models.BooleanField(default=False, null=True)
+    created_at = models.DateTimeField(auto_now_add=True, null=True)
 
     def save(self, *args, **kwargs):
         if not self.id:
