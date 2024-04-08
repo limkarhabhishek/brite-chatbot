@@ -72,3 +72,13 @@ class OpenAIFeedbackView(APIView):
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    def delete(self, request):
+        """
+        Delete all records in the OpenAIFeedback model and return a response.
+
+        :param request: The request object passed to the function.
+        :return: A Response object with the detail message indicating that all records have been deleted.
+        """
+        OpenAIFeedback.objects.all().delete()
+        return Response({"detail": "All the records have been deleted"})

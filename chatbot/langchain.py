@@ -56,7 +56,6 @@ class LangChain:
 
         # Print the absolute path of the transcripts directory
         logger.info(f"Transcripts directory: {transcripts_directory}")
-        
 
         # Get the list of .txt files in the directory
         txt_files = [
@@ -165,7 +164,11 @@ class OpenAIChatbot(LangChain):
         source_list = []
         for source in output["context"]:
             if source.metadata["source"] not in source_list:
-                source_list.append(source.metadata["source"])
+                source_dict = {
+                    "page_content": source.page_content,
+                    "source_document": source.metadata["source"],
+                }
+                source_list.append(source_dict)
 
         return {"answer": answer, "source_list": source_list, "status": 200}
 
